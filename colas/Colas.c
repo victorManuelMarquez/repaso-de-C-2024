@@ -13,7 +13,7 @@ typedef struct Lista
     Nodo *primero;
 } Cola;
 
-const int TOTAL = 3;
+const int TOTAL = 5;
 
 int main(void)
 {
@@ -35,11 +35,14 @@ int main(void)
             cola->primero = nuevo;
         else
         {
-            Nodo *ultimo = cola->primero->siguiente;
-            if (ultimo == NULL)
-                cola->primero->siguiente = nuevo;
-            else
-                ultimo->siguiente = nuevo;
+            // asigno un puntero al primer elemento
+            Nodo *ultimo = cola->primero;
+            // el bucle invocará n nodos hasta dar con el último
+            while (ultimo->siguiente != NULL)
+            {
+                ultimo = ultimo->siguiente; // reasigno el nodo con el que le sigue
+            }
+            ultimo->siguiente = nuevo; // asigno el nuevo nodo al último en la cola
         }
         cola->cantidad++;
     }
