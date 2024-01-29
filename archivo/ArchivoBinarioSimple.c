@@ -67,7 +67,7 @@ int main()
     while (actual)
     {
         printf("Almacenando: [%s]->(%p)\n", actual->dato, actual->siguiente);
-        fwrite(actual, 1, sizeof(struct Nodo), archivoBin);
+        fwrite(actual, sizeof(struct Nodo), 1, archivoBin);
         actual = actual->siguiente;
     }
     fclose(archivoBin);
@@ -82,7 +82,7 @@ int main()
     for (int i=0; i<cantidad; i++)
     {
         struct Nodo *recuperado = malloc(sizeof(struct Nodo));
-        fread(recuperado, 1, sizeof(struct Nodo), archivoBin);
+        fread(recuperado, sizeof(struct Nodo), 1, archivoBin);
         printf("Recuperando info del archivo \"%s\"\n\t{[%s] -> (%p)}\n", nombreArchivo, recuperado->dato, recuperado->siguiente);
         free(recuperado);
     }
@@ -98,6 +98,7 @@ int main()
         free(temporal->dato);
         free(temporal);
     }
+    printf("La pila tiene %d elementos.\n", pila.total);
     printf("Fin del programa.\n");
     return 0;
 }
